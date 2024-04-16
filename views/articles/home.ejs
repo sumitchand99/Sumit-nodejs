@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+
+    
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: #343a40; /* Dark background color */
+    }
+
+    .navbar-brand {
+      color: #ffffff; /* White text color */
+      font-weight: bold;
+    }
+
+    /* Background Graphics Styles */
+    .background-graphics {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: -1; /* Ensure background graphics are behind other content */
+      opacity: 0.1; /* Adjust opacity as needed */
+    }
+
+    /* Card Styles */
+    .article-card {
+      margin-bottom: 20px;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      margin-bottom: 20px;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+
+    .btn-primary, .btn-info, .btn-danger {
+      margin-right: 10px;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+  </style>
+  <title>List Articles</title>
+</head>
+<body>
+  
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">My Blog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Background Graphics -->
+<div class="background-graphics"></div>
+  <!-- Main Content -->
+  <div class="container">
+    <h1 class="mb-4">Blog Articles</h1>
+
+    <div class="row">
+      <!-- Article Cards -->
+      <% articles.forEach(article => { %>
+      <div class="col-lg-4 article-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title"><%= article.title %></h4>
+            <div class="card-subtitle text-muted mb-2">
+              <%= article.createdAt.toLocaleDateString() %>
+            </div>
+            <div class="card-text mb-2"><%= article.description %></div>
+            <a href="articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+            <form
+              action="/articles/<%= article.id %>?_method=DELETE"
+              method="POST"
+              class="d-inline"
+            >
+            </form>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS (required for Bootstrap components) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+ 
+</body>
+</html>
